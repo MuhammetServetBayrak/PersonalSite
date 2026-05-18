@@ -32,6 +32,10 @@
                 <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">Thumbnail URL</label>
                 <input asp-for="ThumbnailUrl" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 0.5px solid var(--border); background: var(--bg-card2); color: var(--text-main); font-size: 13px;" />
             </div>
+            <div style="margin-bottom: 24px; display: flex; align-items: center; gap: 10px;">
+                <input type="checkbox" asp-for="IsActive" id="isActive" style="width: 16px; height: 16px; cursor: pointer;" />
+                <label for="isActive" style="font-size: 13px; color: var(--text-main); cursor: pointer;">Hemen Yayınla</label>
+            </div>
             <div style="display: flex; gap: 8px;">
                 <button type="submit" style="padding: 8px 20px; border-radius: 6px; background: var(--accent); color: var(--accent-text); border: none; font-size: 13px; cursor: pointer;">
                     Kaydet
