@@ -1,0 +1,49 @@
+﻿@model List<EntityLayer.Concrete.BlogCategory>
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Kategoriler";
+}
+
+<div style="background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden; max-width: 800px;">
+    <div style="padding: 14px 18px; border-bottom: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 14px; font-weight: 500;">Kategoriler</span>
+        <a href="/BlogCategory/Create" style="font-size: 12px; padding: 5px 12px; border-radius: 6px; background: var(--accent); color: var(--accent-text); text-decoration: none; display: flex; align-items: center; gap: 5px;">
+            <i class="ti ti-plus"></i> Yeni Kategori
+        </a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div style="padding: 40px; text-align: center; color: var(--text-muted); font-size: 13px;">
+            Henüz kategori yok.
+        </div>
+    }
+    else
+    {
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+            <thead>
+                <tr style="border-bottom: 0.5px solid var(--border);">
+                    <th style="padding: 10px 18px; text-align: left; color: var(--text-muted); font-weight: 500;">İsim</th>
+                    <th style="padding: 10px 18px; text-align: left; color: var(--text-muted); font-weight: 500;">Slug</th>
+                    <th style="padding: 10px 18px; text-align: left; color: var(--text-muted); font-weight: 500;">Açıklama</th>
+                    <th style="padding: 10px 18px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cat in Model)
+                {
+                    <tr style="border-bottom: 0.5px solid var(--border);">
+                        <td style="padding: 12px 18px;">@cat.Name</td>
+                        <td style="padding: 12px 18px; color: var(--text-muted);">@cat.Slug</td>
+                        <td style="padding: 12px 18px; color: var(--text-muted);">@cat.Description</td>
+                        <td style="padding: 12px 18px; display: flex; gap: 6px; justify-content: flex-end;">
+                            <a href="/BlogCategory/Delete/@cat.Id" style="width: 28px; height: 28px; border-radius: 6px; border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none;" onclick="return confirm('Silmek istediğinize emin misiniz?')">
+                                <i class="ti ti-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
