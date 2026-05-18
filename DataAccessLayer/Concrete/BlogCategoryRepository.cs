@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DataAccessLayer.Abstract;
+using EntityLayer.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete
 {
-    internal class BlogCategoryRepository
+    public class BlogCategoryRepository : GenericRepository<BlogCategory>, IBlogCategoryDal
     {
+        public BlogCategoryRepository(PersonalSiteContext context) : base(context) { }
     }
 }
