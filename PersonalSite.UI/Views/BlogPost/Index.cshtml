@@ -1,0 +1,63 @@
+﻿@model List<EntityLayer.Concrete.BlogPost>
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Blog Yazıları";
+}
+
+<div style="background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden;">
+    <div style="padding: 14px 18px; border-bottom: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 14px; font-weight: 500;">Blog Yazıları</span>
+        <a href="/BlogPost/Create" style="font-size: 12px; padding: 5px 12px; border-radius: 6px; background: var(--accent); color: var(--accent-text); text-decoration: none; display: flex; align-items: center; gap: 5px;">
+            <i class="ti ti-plus"></i> Yeni Yazı
+        </a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div style="padding: 40px; text-align: center; color: var(--text-muted); font-size: 13px;">
+            Henüz blog yazısı yok.
+        </div>
+    }
+    else
+    {
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+            <thead>
+                <tr style="border-bottom: 0.5px solid var(--border);">
+                    <th style="padding: 10px 18px; text-align: left; color: var(--text-muted); font-weight: 500;">Başlık</th>
+                    <th style="padding: 10px 18px; text-align: left; color: var(--text-muted); font-weight: 500;">Kategori</th>
+                    <th style="padding: 10px 18px; text-align: left; color: var(--text-muted); font-weight: 500;">Tarih</th>
+                    <th style="padding: 10px 18px; text-align: left; color: var(--text-muted); font-weight: 500;">Durum</th>
+                    <th style="padding: 10px 18px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var post in Model)
+                {
+                    <tr style="border-bottom: 0.5px solid var(--border);">
+                        <td style="padding: 12px 18px;">@post.Title</td>
+                        <td style="padding: 12px 18px; color: var(--text-muted);">@post.BlogCategory?.Name</td>
+                        <td style="padding: 12px 18px; color: var(--text-muted);">@post.CreatedDate.ToString("dd MMM yyyy")</td>
+                        <td style="padding: 12px 18px;">
+                            @if (post.IsActive)
+                            {
+                                <span style="font-size: 11px; padding: 2px 8px; border-radius: 99px; background: rgba(99,153,34,0.12); color: #639922;">Yayında</span>
+                            }
+                            else
+                            {
+                                <span style="font-size: 11px; padding: 2px 8px; border-radius: 99px; background: rgba(56,189,248,0.12); color: var(--accent);">Taslak</span>
+                            }
+                        </td>
+                        <td style="padding: 12px 18px; display: flex; gap: 6px; justify-content: flex-end;">
+                            <a href="/BlogPost/Edit/@post.Id" style="width: 28px; height: 28px; border-radius: 6px; border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none;">
+                                <i class="ti ti-edit"></i>
+                            </a>
+                            <a href="/BlogPost/Delete/@post.Id" style="width: 28px; height: 28px; border-radius: 6px; border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none;" onclick="return confirm('Silmek istediğinize emin misiniz?')">
+                                <i class="ti ti-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

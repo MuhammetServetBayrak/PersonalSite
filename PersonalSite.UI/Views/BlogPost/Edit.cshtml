@@ -1,0 +1,47 @@
+﻿@model EntityLayer.Concrete.BlogPost
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Yazıyı Düzenle";
+}
+
+<div style="background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden; max-width: 800px; margin: 0 auto;">
+    <div style="padding: 14px 18px; border-bottom: 0.5px solid var(--border);">
+        <span style="font-size: 14px; font-weight: 500;">Yazıyı Düzenle</span>
+    </div>
+    <div style="padding: 24px;">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="CreatedDate" />
+            <div style="margin-bottom: 16px;">
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">Başlık</label>
+                <input asp-for="Title" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 0.5px solid var(--border); background: var(--bg-card2); color: var(--text-main); font-size: 13px;" />
+            </div>
+            <div style="margin-bottom: 16px;">
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">Kategori</label>
+                <select asp-for="BlogCategoryId" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 0.5px solid var(--border); background: var(--bg-card2); color: var(--text-main); font-size: 13px;">
+                    <option value="">Kategori seç...</option>
+                    @foreach (var cat in ViewBag.Categories)
+                    {
+                        <option value="@cat.Id">@cat.Name</option>
+                    }
+                </select>
+            </div>
+            <div style="margin-bottom: 16px;">
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">İçerik</label>
+                <textarea asp-for="Content" rows="12" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 0.5px solid var(--border); background: var(--bg-card2); color: var(--text-main); font-size: 13px; resize: vertical;"></textarea>
+            </div>
+            <div style="margin-bottom: 24px;">
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">Thumbnail URL</label>
+                <input asp-for="ThumbnailUrl" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 0.5px solid var(--border); background: var(--bg-card2); color: var(--text-main); font-size: 13px;" />
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button type="submit" style="padding: 8px 20px; border-radius: 6px; background: var(--accent); color: var(--accent-text); border: none; font-size: 13px; cursor: pointer;">
+                    Güncelle
+                </button>
+                <a href="/BlogPost" style="padding: 8px 20px; border-radius: 6px; border: 0.5px solid var(--border); color: var(--text-muted); text-decoration: none; font-size: 13px;">
+                    İptal
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
