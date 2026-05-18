@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html lang="tr" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin Panel</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        [data-bs-theme="dark"] {
+            --bg-main: #0d1117;
+            --bg-sidebar: #1e2a3a;
+            --bg-card: #161b22;
+            --bg-card2: #21262d;
+            --text-main: #e6edf3;
+            --text-muted: rgba(255,255,255,0.5);
+            --border: rgba(255,255,255,0.08);
+            --accent: #38bdf8;
+            --accent-text: #0a0e1a;
+        }
+
+        [data-bs-theme="light"] {
+            --bg-main: #f8fafc;
+            --bg-sidebar: #1e2a3a;
+            --bg-card: #ffffff;
+            --bg-card2: #f1f5f9;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --accent: #0ea5e9;
+            --accent-text: #ffffff;
+        }
+
+        body {
+            background: var(--bg-main);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            display: flex;
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .sidebar {
+            width: 220px;
+            min-width: 220px;
+            background: var(--bg-sidebar);
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-logo {
+            padding: 18px 20px;
+            border-bottom: 0.5px solid rgba(255,255,255,0.08);
+            color: var(--accent);
+            font-size: 15px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .sidebar-nav {
+            padding: 12px 0;
+            flex: 1;
+        }
+
+            .sidebar-nav a {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 9px 20px;
+                font-size: 13px;
+                color: rgba(255,255,255,0.5);
+                text-decoration: none;
+                transition: all 0.2s;
+                border-left: 2px solid transparent;
+            }
+
+                .sidebar-nav a:hover,
+                .sidebar-nav a.active {
+                    color: #fff;
+                    background: rgba(56,189,248,0.12);
+                    border-left-color: var(--accent);
+                }
+
+            .sidebar-nav i {
+                font-size: 18px;
+            }
+
+        .main-wrap {
+            margin-left: 220px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar {
+            background: var(--bg-card);
+            border-bottom: 0.5px solid var(--border);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .topbar-title {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .topbar-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-outline {
+            font-size: 12px;
+            padding: 5px 12px;
+            border-radius: 6px;
+            border: 0.5px solid var(--border);
+            color: var(--text-muted);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+            .btn-outline:hover {
+                color: var(--text-main);
+                border-color: var(--accent);
+            }
+
+        .page-body {
+            padding: 24px;
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="/Admin" class="sidebar-logo">
+            <i class="ti ti-terminal-2"></i> Admin Panel
+        </a>
+        <nav class="sidebar-nav">
+            <a href="/Admin" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Index" && ViewContext.RouteData.Values["controller"]?.ToString() == "Admin" ? "active" : "")">
+                <i class="ti ti-layout-dashboard"></i> Dashboard
+            </a>
+            <a href="/Admin/BlogPost">
+                <i class="ti ti-news"></i> Blog Yazıları
+            </a>
+            <a href="/Admin/BlogCategory">
+                <i class="ti ti-tags"></i> Kategoriler
+            </a>
+            <a href="/Admin/Project">
+                <i class="ti ti-code"></i> Projeler
+            </a>
+            <a href="/Admin/Experience">
+                <i class="ti ti-briefcase"></i> Deneyim
+            </a>
+            <a href="/Admin/Education">
+                <i class="ti ti-school"></i> Eğitim
+            </a>
+            <a href="/Admin/Skill">
+                <i class="ti ti-cpu"></i> Beceriler
+            </a>
+        </nav>
+    </div>
+
+    <div class="main-wrap">
+        <div class="topbar">
+            <span class="topbar-title">@ViewData["Title"]</span>
+            <div class="topbar-actions">
+                <button class="btn-outline" onclick="toggleTheme()">
+                    <i class="ti ti-sun"></i> Tema
+                </button>
+                <a href="/" class="btn-outline">
+                    <i class="ti ti-world"></i> Siteye Git
+                </a>
+            </div>
+        </div>
+        <div class="page-body">
+            @RenderBody()
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-bs-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-bs-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        const saved = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-bs-theme', saved);
+    </script>
+</body>
+</html>

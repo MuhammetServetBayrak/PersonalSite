@@ -1,0 +1,39 @@
+﻿@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Dashboard";
+}
+
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px;">
+    <div style="background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 8px; padding: 16px;">
+        <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px;">Blog Yazıları</div>
+        <div style="font-size: 28px; font-weight: 500; color: var(--accent);">0</div>
+        <i class="ti ti-news" style="font-size: 18px; color: var(--text-muted);"></i>
+    </div>
+    <div style="background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 8px; padding: 16px;">
+        <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px;">Projeler</div>
+        <div style="font-size: 28px; font-weight: 500; color: var(--accent);">0</div>
+        <i class="ti ti-code" style="font-size: 18px; color: var(--text-muted);"></i>
+    </div>
+    <div style="background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 8px; padding: 16px;">
+        <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px;">Kategoriler</div>
+        <div style="font-size: 28px; font-weight: 500; color: var(--accent);">0</div>
+        <i class="ti ti-tags" style="font-size: 18px; color: var(--text-muted);"></i>
+    </div>
+    <div style="background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 8px; padding: 16px;">
+        <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px;">Beceriler</div>
+        <div style="font-size: 28px; font-weight: 500; color: var(--accent);">0</div>
+        <i class="ti ti-cpu" style="font-size: 18px; color: var(--text-muted);"></i>
+    </div>
+</div>
+
+<div style="background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden;">
+    <div style="padding: 14px 18px; border-bottom: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 14px; font-weight: 500;">Son Blog Yazıları</span>
+        <a href="/Admin/BlogPost/Create" style="font-size: 12px; padding: 5px 12px; border-radius: 6px; background: var(--accent); color: var(--accent-text); text-decoration: none; display: flex; align-items: center; gap: 5px;">
+            <i class="ti ti-plus"></i> Yeni Yazı
+        </a>
+    </div>
+    <div style="padding: 40px; text-align: center; color: var(--text-muted); font-size: 13px;">
+        Henüz blog yazısı yok.
+    </div>
+</div>
