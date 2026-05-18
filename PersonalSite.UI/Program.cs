@@ -1,3 +1,6 @@
+using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
+using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +11,22 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<PersonalSiteContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("PersonalSiteDb")));
+
+// DAL
+builder.Services.AddScoped<IBlogPostDal, BlogPostRepository>();
+builder.Services.AddScoped<IBlogCategoryDal, BlogCategoryRepository>();
+builder.Services.AddScoped<IProjectDal, ProjectRepository>();
+builder.Services.AddScoped<IExperienceDal, ExperienceRepository>();
+builder.Services.AddScoped<IEducationDal, EducationRepository>();
+builder.Services.AddScoped<ISkillDal, SkillRepository>();
+
+// BL
+builder.Services.AddScoped<IBlogPostService, BlogPostManager>();
+builder.Services.AddScoped<IBlogCategoryService, BlogCategoryManager>();
+builder.Services.AddScoped<IProjectService, ProjectManager>();
+builder.Services.AddScoped<IExperienceService, ExperienceManager>();
+builder.Services.AddScoped<IEducationService, EducationManager>();
+builder.Services.AddScoped<ISkillService, SkillManager>();
 
 var app = builder.Build();
 
