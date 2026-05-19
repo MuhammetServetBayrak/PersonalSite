@@ -40,3 +40,8 @@
 2026-05-19 12:12:21.405 +03 [15392] LOG:  background worker "logical replication launcher" (PID 10336) exited with exit code 1
 2026-05-19 12:12:21.518 +03 [13880] LOG:  checkpoint complete: wrote 0 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.150 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=0 kB; lsn=0/1D48A00, redo lsn=0/1D48A00
 2026-05-19 12:12:21.537 +03 [15392] LOG:  database system is shut down
+2026-05-19 12:15:29.703 +03 [8816] LOG:  starting PostgreSQL 18.4 on x86_64-windows, compiled by msvc-19.44.35226, 64-bit
+2026-05-19 12:15:29.707 +03 [8816] LOG:  listening on IPv6 address "::1", port 5432
+2026-05-19 12:15:29.707 +03 [8816] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-05-19 12:15:29.798 +03 [17944] LOG:  database system was shut down at 2026-05-19 12:12:21 +03
+2026-05-19 12:15:29.817 +03 [8816] LOG:  database system is ready to accept connections
