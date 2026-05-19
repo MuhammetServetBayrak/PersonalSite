@@ -6,22 +6,22 @@
 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px;">
     <div style="background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 8px; padding: 16px;">
         <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px;">Blog Yazıları</div>
-        <div style="font-size: 28px; font-weight: 500; color: var(--accent);">0</div>
+        <div style="font-size: 28px; font-weight: 500; color: var(--accent);">@ViewBag.PostCount</div>
         <i class="ti ti-news" style="font-size: 18px; color: var(--text-muted);"></i>
     </div>
     <div style="background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 8px; padding: 16px;">
         <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px;">Projeler</div>
-        <div style="font-size: 28px; font-weight: 500; color: var(--accent);">0</div>
+        <div style="font-size: 28px; font-weight: 500; color: var(--accent);">@ViewBag.ProjectCount</div>
         <i class="ti ti-code" style="font-size: 18px; color: var(--text-muted);"></i>
     </div>
     <div style="background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 8px; padding: 16px;">
         <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px;">Kategoriler</div>
-        <div style="font-size: 28px; font-weight: 500; color: var(--accent);">0</div>
+        <div style="font-size: 28px; font-weight: 500; color: var(--accent);">@ViewBag.CategoryCount</div>
         <i class="ti ti-tags" style="font-size: 18px; color: var(--text-muted);"></i>
     </div>
     <div style="background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 8px; padding: 16px;">
         <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px;">Beceriler</div>
-        <div style="font-size: 28px; font-weight: 500; color: var(--accent);">0</div>
+        <div style="font-size: 28px; font-weight: 500; color: var(--accent);">@ViewBag.SkillCount</div>
         <i class="ti ti-cpu" style="font-size: 18px; color: var(--text-muted);"></i>
     </div>
 </div>
@@ -29,11 +29,47 @@
 <div style="background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden;">
     <div style="padding: 14px 18px; border-bottom: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
         <span style="font-size: 14px; font-weight: 500;">Son Blog Yazıları</span>
-        <a href="/Admin/BlogPost/Create" style="font-size: 12px; padding: 5px 12px; border-radius: 6px; background: var(--accent); color: var(--accent-text); text-decoration: none; display: flex; align-items: center; gap: 5px;">
+        <a href="/BlogPost/Create" style="font-size: 12px; padding: 5px 12px; border-radius: 6px; background: var(--accent); color: var(--accent-text); text-decoration: none; display: flex; align-items: center; gap: 5px;">
             <i class="ti ti-plus"></i> Yeni Yazı
         </a>
     </div>
-    <div style="padding: 40px; text-align: center; color: var(--text-muted); font-size: 13px;">
-        Henüz blog yazısı yok.
-    </div>
+    @if (ViewBag.RecentPosts == null || ViewBag.RecentPosts.Count == 0)
+    {
+        <div style="padding: 40px; text-align: center; color: var(--text-muted); font-size: 13px;">
+            Henüz blog yazısı yok.
+        </div>
+    }
+    else
+    {
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+            <thead>
+                <tr style="border-bottom: 0.5px solid var(--border);">
+                    <th style="padding: 10px 18px; text-align: left; color: var(--text-muted); font-weight: 500;">Başlık</th>
+                    <th style="padding: 10px 18px; text-align: left; color: var(--text-muted); font-weight: 500;">Kategori</th>
+                    <th style="padding: 10px 18px; text-align: left; color: var(--text-muted); font-weight: 500;">Tarih</th>
+                    <th style="padding: 10px 18px; text-align: left; color: var(--text-muted); font-weight: 500;">Durum</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var post in ViewBag.RecentPosts)
+                {
+                    <tr style="border-bottom: 0.5px solid var(--border);">
+                        <td style="padding: 12px 18px;">@post.Title</td>
+                        <td style="padding: 12px 18px; color: var(--text-muted);">@post.BlogCategory?.Name</td>
+                        <td style="padding: 12px 18px; color: var(--text-muted);">@post.CreatedDate.ToString("dd MMM yyyy")</td>
+                        <td style="padding: 12px 18px;">
+                            @if (post.IsActive)
+                            {
+                                <span style="font-size: 11px; padding: 2px 8px; border-radius: 99px; background: rgba(99,153,34,0.12); color: #639922;">Yayında</span>
+                            }
+                            else
+                            {
+                                <span style="font-size: 11px; padding: 2px 8px; border-radius: 99px; background: rgba(56,189,248,0.12); color: var(--accent);">Taslak</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 </div>

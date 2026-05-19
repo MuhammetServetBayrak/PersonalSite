@@ -26,7 +26,7 @@
             </div>
             <div style="margin-bottom: 16px;">
                 <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">İçerik</label>
-                <textarea asp-for="Content" rows="12" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 0.5px solid var(--border); background: var(--bg-card2); color: var(--text-main); font-size: 13px; resize: vertical;"></textarea>
+                <textarea asp-for="Content" id="Content" rows="12" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 0.5px solid var(--border); background: var(--bg-card2); color: var(--text-main); font-size: 13px; resize: vertical;"></textarea>
             </div>
             <div style="margin-bottom: 24px;">
                 <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">Thumbnail URL</label>
@@ -46,4 +46,21 @@
             </div>
         </form>
     </div>
+
+    <script src="https://cdn.tiny.cloud/1/5z1hiyvj5icv18q81bxrrxot94qhq3tzpoawyhz2r070d9zk/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#Content',
+            plugins: 'image link lists code',
+            toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link image | code',
+            skin: 'oxide-dark',
+            content_css: 'dark',
+            height: 400,
+            images_upload_handler: (blobInfo) => new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.readAsDataURL(blobInfo.blob());
+            })
+        });
+    </script>
 </div>
