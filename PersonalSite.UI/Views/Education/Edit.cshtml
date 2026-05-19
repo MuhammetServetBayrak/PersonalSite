@@ -1,0 +1,43 @@
+﻿@model EntityLayer.Concrete.Education
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Eğitimi Düzenle";
+}
+
+<div style="background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden;">
+    <div style="padding: 14px 18px; border-bottom: 0.5px solid var(--border);">
+        <span style="font-size: 14px; font-weight: 500;">Eğitimi Düzenle</span>
+    </div>
+    <div style="padding: 24px;">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="CreatedDate" />
+            <div style="margin-bottom: 16px;">
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">Okul Adı</label>
+                <input asp-for="SchoolName" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 0.5px solid var(--border); background: var(--bg-card2); color: var(--text-main); font-size: 13px;" />
+            </div>
+            <div style="margin-bottom: 16px;">
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">Bölüm</label>
+                <input asp-for="Department" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 0.5px solid var(--border); background: var(--bg-card2); color: var(--text-main); font-size: 13px;" />
+            </div>
+            <div style="margin-bottom: 16px;">
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">Açıklama</label>
+                <textarea asp-for="Description" rows="3" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 0.5px solid var(--border); background: var(--bg-card2); color: var(--text-main); font-size: 13px; resize: vertical;"></textarea>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+                <div>
+                    <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">Başlangıç Tarihi</label>
+                    <input asp-for="StartDate" type="date" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 0.5px solid var(--border); background: var(--bg-card2); color: var(--text-main); font-size: 13px;" />
+                </div>
+                <div>
+                    <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">Bitiş Tarihi (Boş = Devam ediyor)</label>
+                    <input asp-for="EndDate" type="date" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 0.5px solid var(--border); background: var(--bg-card2); color: var(--text-main); font-size: 13px;" />
+                </div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button type="submit" style="padding: 8px 20px; border-radius: 6px; background: var(--accent); color: var(--accent-text); border: none; font-size: 13px; cursor: pointer;">Güncelle</button>
+                <a href="/Education" style="padding: 8px 20px; border-radius: 6px; border: 0.5px solid var(--border); color: var(--text-muted); text-decoration: none; font-size: 13px;">İptal</a>
+            </div>
+        </form>
+    </div>
+</div>

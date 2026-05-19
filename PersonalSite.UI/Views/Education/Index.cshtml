@@ -1,0 +1,55 @@
+﻿@model List<EntityLayer.Concrete.Education>
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Eğitim";
+}
+
+<div style="background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden;">
+    <div style="padding: 14px 18px; border-bottom: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 14px; font-weight: 500;">Eğitim</span>
+        <a href="/Education/Create" style="font-size: 12px; padding: 5px 12px; border-radius: 6px; background: var(--accent); color: var(--accent-text); text-decoration: none; display: flex; align-items: center; gap: 5px;">
+            <i class="ti ti-plus"></i> Yeni Eğitim
+        </a>
+    </div>
+    @if (!Model.Any())
+    {
+        <div style="padding: 40px; text-align: center; color: var(--text-muted); font-size: 13px;">
+            Henüz eğitim bilgisi yok.
+        </div>
+    }
+    else
+    {
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+            <thead>
+                <tr style="border-bottom: 0.5px solid var(--border);">
+                    <th style="padding: 10px 18px; text-align: left; color: var(--text-muted); font-weight: 500;">Okul</th>
+                    <th style="padding: 10px 18px; text-align: left; color: var(--text-muted); font-weight: 500;">Bölüm</th>
+                    <th style="padding: 10px 18px; text-align: left; color: var(--text-muted); font-weight: 500;">Başlangıç</th>
+                    <th style="padding: 10px 18px; text-align: left; color: var(--text-muted); font-weight: 500;">Bitiş</th>
+                    <th style="padding: 10px 18px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var edu in Model)
+                {
+                    <tr style="border-bottom: 0.5px solid var(--border);">
+                        <td style="padding: 12px 18px;">@edu.SchoolName</td>
+                        <td style="padding: 12px 18px; color: var(--text-muted);">@edu.Department</td>
+                        <td style="padding: 12px 18px; color: var(--text-muted);">@edu.StartDate.ToString("MMM yyyy")</td>
+                        <td style="padding: 12px 18px; color: var(--text-muted);">
+                            @(edu.EndDate.HasValue? edu.EndDate.Value.ToString("MMM yyyy") : "Devam ediyor")
+                        </td>
+                        <td style="padding: 12px 18px; display: flex; gap: 6px; justify-content: flex-end;">
+                            <a href="/Education/Edit/@edu.Id" style="width: 28px; height: 28px; border-radius: 6px; border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none;">
+                                <i class="ti ti-edit"></i>
+                            </a>
+                            <a href="/Education/Delete/@edu.Id" style="width: 28px; height: 28px; border-radius: 6px; border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none;" onclick="return confirm('Silmek istediğinize emin misiniz?')">
+                                <i class="ti ti-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
