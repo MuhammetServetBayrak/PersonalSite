@@ -150,6 +150,46 @@
             padding: 24px 40px;
             flex: 1;
         }
+
+        .sidebar-nav a i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-footer {
+            padding: 16px 20px;
+            border-top: 0.5px solid rgba(255,255,255,0.08);
+            font-size: 12px;
+            color: rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .topbar-title {
+            font-size: 15px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge {
+            font-size: 10px;
+            padding: 2px 7px;
+            border-radius: 99px;
+            background: rgba(56,189,248,0.15);
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        .sidebar-nav .nav-section {
+            font-size: 10px;
+            color: rgba(255,255,255,0.25);
+            padding: 12px 20px 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
     </style>
 </head>
 <body>
@@ -158,28 +198,33 @@
             <i class="ti ti-terminal-2"></i> Admin Panel
         </a>
         <nav class="sidebar-nav">
-            <a href="/Admin" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Index" && ViewContext.RouteData.Values["controller"]?.ToString() == "Admin" ? "active" : "")">
+            <a href="/Admin" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Admin" ? "active" : "")">
                 <i class="ti ti-layout-dashboard"></i> Dashboard
             </a>
-            <a href="/Admin/BlogPost">
+            <div class="nav-section">İçerik</div>
+            <a href="/BlogPost" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "BlogPost" ? "active" : "")">
                 <i class="ti ti-news"></i> Blog Yazıları
             </a>
-            <a href="/Admin/BlogCategory">
+            <a href="/BlogCategory" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "BlogCategory" ? "active" : "")">
                 <i class="ti ti-tags"></i> Kategoriler
             </a>
-            <a href="/Admin/Project">
+            <a href="/Project" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Project" ? "active" : "")">
                 <i class="ti ti-code"></i> Projeler
             </a>
-            <a href="/Admin/Experience">
+            <div class="nav-section">CV</div>
+            <a href="/Experience" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Experience" ? "active" : "")">
                 <i class="ti ti-briefcase"></i> Deneyim
             </a>
-            <a href="/Admin/Education">
+            <a href="/Education" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Education" ? "active" : "")">
                 <i class="ti ti-school"></i> Eğitim
             </a>
-            <a href="/Admin/Skill">
+            <a href="/Skill" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Skill" ? "active" : "")">
                 <i class="ti ti-cpu"></i> Beceriler
             </a>
         </nav>
+        <div class="sidebar-footer">
+            <i class="ti ti-user"></i> Muhammet Servet
+        </div>
     </div>
 
     <div class="main-wrap">
