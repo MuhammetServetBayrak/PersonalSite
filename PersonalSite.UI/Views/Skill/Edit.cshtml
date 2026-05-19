@@ -1,0 +1,40 @@
+﻿@model EntityLayer.Concrete.Skill
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Beceriyi Düzenle";
+}
+
+<div style="background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden;">
+    <div style="padding: 14px 18px; border-bottom: 0.5px solid var(--border);">
+        <span style="font-size: 14px; font-weight: 500;">Beceriyi Düzenle</span>
+    </div>
+    <div style="padding: 24px;">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="CreatedDate" />
+            <div style="margin-bottom: 16px;">
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">Beceri Adı</label>
+                <input asp-for="Name" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 0.5px solid var(--border); background: var(--bg-card2); color: var(--text-main); font-size: 13px;" />
+            </div>
+            <div style="margin-bottom: 16px;">
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">Kategori</label>
+                <input asp-for="Category" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 0.5px solid var(--border); background: var(--bg-card2); color: var(--text-main); font-size: 13px;" />
+            </div>
+            <div style="margin-bottom: 24px;">
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">Seviye</label>
+                <select asp-for="Level" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 0.5px solid var(--border); background: var(--bg-card2); color: var(--text-main); font-size: 13px;">
+                    <option value="">Seviye seç...</option>
+                    <option value="Başlangıç">Başlangıç</option>
+                    <option value="Temel">Temel</option>
+                    <option value="Orta">Orta</option>
+                    <option value="İyi">İyi</option>
+                    <option value="İleri">İleri</option>
+                </select>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button type="submit" style="padding: 8px 20px; border-radius: 6px; background: var(--accent); color: var(--accent-text); border: none; font-size: 13px; cursor: pointer;">Güncelle</button>
+                <a href="/Skill" style="padding: 8px 20px; border-radius: 6px; border: 0.5px solid var(--border); color: var(--text-muted); text-decoration: none; font-size: 13px;">İptal</a>
+            </div>
+        </form>
+    </div>
+</div>
