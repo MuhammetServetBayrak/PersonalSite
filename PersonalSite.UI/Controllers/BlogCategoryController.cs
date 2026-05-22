@@ -42,5 +42,19 @@ namespace PersonalSite.UI.Controllers
             _blogCategoryService.Delete(category);
             return RedirectToAction("Index");
         }
+
+        public IActionResult Edit(int id)
+        {
+            ViewData["Title"] = "Kategoriyi Düzenle";
+            var category = _blogCategoryService.GetById(id);
+            return View(category);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(BlogCategory category)
+        {
+            _blogCategoryService.Update(category);
+            return RedirectToAction("Index");
+        }
     }
 }
