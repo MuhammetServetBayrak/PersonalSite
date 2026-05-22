@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Hakkımda";
+}
+
+
+<div class="about-grid">
+    <div class="about-card">
+        <div class="about-avatar">
+            <i class="ti ti-user"></i>
+        </div>
+        <div class="about-name">Muhammet Servet Bayrak</div>
+        <div class="about-role">Sistem Yöneticisi & Teknik Destek</div>
+        <div class="about-info">
+            <div class="about-info-item">
+                <i class="ti ti-building"></i> Netinternet
+            </div>
+            <div class="about-info-item">
+                <i class="ti ti-map-pin"></i> Türkiye
+            </div>
+            <div class="about-info-item">
+                <i class="ti ti-brand-github"></i>
+                <a href="https://github.com/MuhammetServetBayrak" target="_blank" style="color: var(--accent); text-decoration: none;">GitHub</a>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="section-title"><i class="ti ti-briefcase"></i> Deneyim</div>
+        <div class="timeline">
+            @foreach (var exp in ViewBag.Experiences)
+            {
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        @exp.StartDate.ToString("MMM yyyy") —
+                        @(exp.EndDate.HasValue? exp.EndDate.Value.ToString("MMM yyyy") : "Günümüz")
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">@exp.CompanyName</div>
+                        <div class="timeline-sub">@exp.Position</div>
+                        <div class="timeline-desc">@exp.Description</div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="section-title"><i class="ti ti-school"></i> Eğitim</div>
+        <div class="timeline">
+            @foreach (var edu in ViewBag.Educations)
+            {
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        @edu.StartDate.ToString("MMM yyyy") —
+                        @(edu.EndDate.HasValue? edu.EndDate.Value.ToString("MMM yyyy") : "Günümüz")
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">@edu.SchoolName</div>
+                        <div class="timeline-sub">@edu.Department</div>
+                        <div class="timeline-desc">@edu.Description</div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="section-title"><i class="ti ti-cpu"></i> Beceriler</div>
+        <div class="skills-grid">
+            @foreach (var skill in ViewBag.Skills)
+            {
+                <div class="skill-item">
+                    <span class="skill-name">@skill.Name</span>
+                    <span class="skill-level">@skill.Level</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>

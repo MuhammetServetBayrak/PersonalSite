@@ -507,3 +507,177 @@ footer {
         font-size: 14px;
         color: var(--text-muted);
     }
+/* === HAKKIMDA === */
+.about-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.about-card {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    position: sticky;
+    top: 80px;
+    text-align: center;
+}
+
+.about-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(56,189,248,0.12);
+    border: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 32px;
+    color: var(--accent);
+}
+
+.about-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 4px;
+    font-family: monospace;
+}
+
+.about-role {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.about-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+    margin-top: 16px;
+    border-top: 0.5px solid var(--border);
+    padding-top: 16px;
+}
+
+.about-info-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.section-title {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: monospace;
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 40px;
+}
+
+.timeline-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 20px;
+    padding-bottom: 24px;
+    position: relative;
+}
+
+    .timeline-item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        left: 119px;
+        top: 24px;
+        bottom: 0;
+        width: 1px;
+        background: var(--border);
+    }
+
+.timeline-date {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: monospace;
+    text-align: right;
+    padding-top: 4px;
+}
+
+.timeline-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    position: absolute;
+    left: 116px;
+    top: 6px;
+}
+
+.timeline-content {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+}
+
+.timeline-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+
+.timeline-sub {
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 6px;
+}
+
+.timeline-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.skill-item {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.skill-name {
+    font-size: 13px;
+    color: var(--text-main);
+}
+
+.skill-level {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 99px;
+    background: rgba(56,189,248,0.12);
+    color: var(--accent);
+    font-family: monospace;
+}
