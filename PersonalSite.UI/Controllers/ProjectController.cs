@@ -45,6 +45,8 @@ namespace PersonalSite.UI.Controllers
         [HttpPost]
         public IActionResult Edit(Project project)
         {
+            if (project.CreatedDate == default)
+                project.CreatedDate = DateTime.UtcNow;
             _projectService.Update(project);
             return RedirectToAction("Index");
         }

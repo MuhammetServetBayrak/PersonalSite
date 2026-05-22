@@ -1,0 +1,57 @@
+﻿@model List<EntityLayer.Concrete.Project>
+@{
+    ViewData["Title"] = "Projeler";
+}
+
+
+<div class="page-header">
+    <h1><i class="ti ti-code"></i> Projeler</h1>
+    <p>Üzerinde çalıştığım projeler ve geliştirmeler.</p>
+</div>
+
+@if (!Model.Any())
+{
+    <div style="text-align: center; padding: 60px; color: var(--text-muted); font-size: 13px;">
+        <i class="ti ti-code" style="font-size: 32px; display: block; margin-bottom: 12px;"></i>
+        Henüz proje yok.
+    </div>
+}
+else
+{
+    <div class="projects-grid">
+        @foreach (var project in Model)
+        {
+            <div class="project-card">
+                @if (!string.IsNullOrEmpty(project.ThumbnailUrl))
+                {
+                    <img src="@project.ThumbnailUrl" style="width:100%; border-radius:6px; height:160px; object-fit:cover;" />
+                }
+                <div class="project-title">@project.Title</div>
+                <div class="project-desc">@project.Description</div>
+                @if (!string.IsNullOrEmpty(project.Technologies))
+                {
+                    <div class="project-tags">
+                        @foreach (var tag in project.Technologies!.Split(','))
+                        {
+                            <span class="project-tag">@tag.Trim()</span>
+                        }
+                    </div>
+                }
+                <div class="project-links">
+                    @if (!string.IsNullOrEmpty(project.GitHubUrl))
+                    {
+                        <a href="@project.GitHubUrl" target="_blank" class="project-link">
+                            <i class="ti ti-brand-github"></i> GitHub
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(project.LiveUrl))
+                    {
+                        <a href="@project.LiveUrl" target="_blank" class="project-link">
+                            <i class="ti ti-external-link"></i> Canlı
+                        </a>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}
