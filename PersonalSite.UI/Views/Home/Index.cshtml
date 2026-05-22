@@ -1,8 +1,220 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Anasayfa";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    #trail-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    .hero {
+        min-height: calc(100vh - 60px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 60px 24px;
+    }
+
+    .hero-name {
+        font-size: 48px;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 2px;
+        margin-bottom: 12px;
+        font-family: monospace;
+    }
+
+    .hero-title {
+        font-size: 14px;
+        color: var(--text-muted);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+        min-height: 20px;
+        font-family: monospace;
+    }
+
+    .hero-desc {
+        font-size: 15px;
+        color: var(--text-muted);
+        max-width: 500px;
+        line-height: 1.7;
+        margin-bottom: 32px;
+    }
+
+    .hero-btns {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 48px;
+    }
+
+    .btn-primary {
+        padding: 10px 24px;
+        border-radius: 6px;
+        background: var(--accent);
+        color: var(--accent-text);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 500;
+        transition: opacity 0.2s;
+    }
+
+        .btn-primary:hover {
+            opacity: 0.85;
+        }
+
+    .btn-secondary {
+        padding: 10px 24px;
+        border-radius: 6px;
+        border: 0.5px solid var(--border);
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 13px;
+        transition: all 0.2s;
+    }
+
+        .btn-secondary:hover {
+            color: var(--text-main);
+            border-color: var(--accent);
+        }
+
+    .tech-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+    }
+
+    .tech-badge {
+        font-size: 11px;
+        padding: 4px 12px;
+        border-radius: 99px;
+        border: 0.5px solid var(--border);
+        color: var(--text-muted);
+        letter-spacing: 0.05em;
+        font-family: monospace;
+    }
+</style>
+
+<canvas id="trail-canvas"></canvas>
+
+<div class="hero">
+    <div class="hero-name">Muhammet Servet Bayrak</div>
+    <div class="hero-title" id="typed-title"></div>
+    <div class="hero-desc">
+        Netinternet bünyesinde sistem yöneticisi olarak görev yapıyorum.
+        Linux, sanallaştırma, network ve sunucu yönetimi alanlarında edindiğim
+        deneyimleri burada paylaşıyorum.
+    </div>
+    <div class="hero-btns">
+        <a href="/About" class="btn-primary">Hakkımda</a>
+        <a href="/Blog" class="btn-secondary">Yazılarım</a>
+    </div>
+    <div class="tech-badges">
+        <span class="tech-badge">ESXi</span>
+        <span class="tech-badge">vCenter</span>
+        <span class="tech-badge">Veeam Backup</span>
+        <span class="tech-badge">Linux</span>
+        <span class="tech-badge">Windows Server</span>
+        <span class="tech-badge">Network</span>
+        <span class="tech-badge">cPanel</span>
+        <span class="tech-badge">Plesk</span>
+        <span class="tech-badge">SSH</span>
+    </div>
 </div>
+
+<script>
+    const canvas = document.getElementById('trail-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const mouse = { x: 0, y: 0, px: 0, py: 0 };
+    const particles = [];
+    const chars = '01<>/\\#$%{}[]';
+
+    document.addEventListener('mousemove', e => {
+        mouse.px = mouse.x;
+        mouse.py = mouse.y;
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+
+        const dx = mouse.x - mouse.px;
+        const dy = mouse.y - mouse.py;
+        const speed = Math.sqrt(dx * dx + dy * dy);
+        const count = Math.min(Math.floor(speed / 3), 8);
+
+        for (let i = 0; i < count; i++) {
+            particles.push({
+                x: mouse.x + (Math.random() - 0.5) * 8,
+                y: mouse.y + (Math.random() - 0.5) * 8,
+                vx: (Math.random() - 0.5) * 0.8,
+                vy: Math.random() * 1.5 + 0.5,
+                alpha: 0.9,
+                size: Math.random() * 8 + 8,
+                char: chars[Math.floor(Math.random() * chars.length)],
+                color: Math.random() > 0.3 ? '#38bdf8' : '#7dd3fc',
+                timer: 0
+            });
+        }
+    });
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+            p.timer++;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.04;
+            p.alpha -= 0.018;
+            if (p.timer % 8 === 0) p.char = chars[Math.floor(Math.random() * chars.length)];
+
+            if (p.alpha <= 0 || p.y > canvas.height) {
+                particles.splice(i, 1);
+                continue;
+            }
+
+            ctx.globalAlpha = p.alpha;
+            ctx.fillStyle = p.color;
+            ctx.font = `${p.size}px monospace`;
+            ctx.fillText(p.char, p.x, p.y);
+        }
+
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+
+    const titles = ['Sistem Yöneticisi', 'Network', 'Sanallaştırma', 'Linux Yönetimi'];
+    let ti = 0, ci = 0, deleting = false;
+    const el = document.getElementById('typed-title');
+
+    function type() {
+        const current = titles[ti];
+        if (!deleting) {
+            el.textContent = current.substring(0, ci++);
+            if (ci > current.length) { deleting = true; setTimeout(type, 1500); return; }
+        } else {
+            el.textContent = current.substring(0, ci--);
+            if (ci < 0) { deleting = false; ti = (ti + 1) % titles.length; ci = 0; }
+        }
+        setTimeout(type, deleting ? 50 : 80);
+    }
+    type();
+</script>
