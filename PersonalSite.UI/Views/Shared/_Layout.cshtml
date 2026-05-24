@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="tr" data-bs-theme="dark">
+<html lang="tr" data-bs-theme="light">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,13 +16,13 @@
             <a href="/About">Hakkımda</a>
             <a href="/Blog">Çözümler</a>
             <a href="/Projects">Projeler</a>
-        </div>        <div class="navbar-actions">
+        </div>
+        <div class="navbar-actions">
             <button class="btn-theme" onclick="toggleTheme()">
-                <i class="ti ti-sun" id="themeIcon"></i>
+                <i class="ti ti-moon" id="themeIcon"></i>
             </button>
         </div>
     </nav>
-
     <div class="page-content">
         @RenderBody()
     </div>
@@ -32,7 +32,7 @@
     </footer>
 
     <script>
-        function toggleTheme() {
+                function toggleTheme() {
             const html = document.documentElement;
             const current = html.getAttribute('data-bs-theme');
             const next = current === 'dark' ? 'light' : 'dark';
@@ -40,7 +40,7 @@
             localStorage.setItem('theme', next);
             document.getElementById('themeIcon').className = next === 'dark' ? 'ti ti-sun' : 'ti ti-moon';
         }
-        const saved = localStorage.getItem('theme') || 'dark';
+        const saved = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-bs-theme', saved);
         document.getElementById('themeIcon').className = saved === 'dark' ? 'ti ti-sun' : 'ti ti-moon';
     </script>
