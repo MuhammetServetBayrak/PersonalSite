@@ -1,0 +1,12 @@
+﻿@model List<EntityLayer.Concrete.BlogCategory>
+
+<a href="/Blog" class="@(Context.Request.Path.StartsWithSegments("/Blog") ? "active" : "")">
+    Çözümler <i class="ti ti-chevron-down" style="font-size:12px;"></i>
+</a>
+<div class="dropdown-menu">
+    <a href="/Blog">Tümü</a>
+    @foreach (var cat in Model)
+    {
+        <a href="/Blog?categoryId=@cat.Id">@cat.Name</a>
+    }
+</div>
